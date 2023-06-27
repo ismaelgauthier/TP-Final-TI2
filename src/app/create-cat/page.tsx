@@ -12,7 +12,7 @@ const schema = yup.object({
   title: yup.string().min(2).max(20).required(),
   desccription: yup.string ().required(),
   categoriesId: yup.string().required(),
-  isSold: yup.string().required(),
+  
 })
 .required();
 
@@ -71,7 +71,7 @@ export default function Contact() {
           </Grid>
           
           <Grid item sm={12}>
-            <Button variant="contained" type="submit" disabled={!isValid}>Send</Button>
+            <Button variant="contained" type="submit" disabled={isValid}>create products</Button>
           </Grid>
         </Grid>
         </form>
