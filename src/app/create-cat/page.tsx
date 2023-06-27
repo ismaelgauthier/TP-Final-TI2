@@ -10,7 +10,7 @@ import * as yup from "yup";
 
 const schema = yup.object({
   title: yup.string().min(2).max(20).required(),
-  desccription: yup.string ().required(),
+  description: yup.string ().required(),
   categoriesId: yup.string().required(),
   
 })
