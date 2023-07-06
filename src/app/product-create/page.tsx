@@ -5,6 +5,10 @@ import { Button, Container, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import CheckIcon from '@mui/icons-material/Check';
+
+
+
 
 
 
@@ -64,6 +68,7 @@ export default function Contact() {
               variant="outlined"
               fullWidth
               {...register("categoriesId")} 
+              
               error={!!errors.categoriesId }
               helperText={errors.categoriesId?.message}
               required
@@ -71,7 +76,7 @@ export default function Contact() {
           </Grid>
           
           <Grid item sm={12}>
-            <Button variant="contained" type="submit" disabled={isValid}>create products</Button>
+          <Button variant="contained" startIcon={<CheckIcon />} color="success" >Create product</Button>
           </Grid>
         </Grid>
         </form>
