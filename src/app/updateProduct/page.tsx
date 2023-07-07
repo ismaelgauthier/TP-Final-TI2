@@ -28,6 +28,8 @@ export default function Contact() {
     register,
     handleSubmit,
     watch,
+    reset,
+    
     formState: { errors, isValid },
   } = useForm<ContactForm>({ mode: "onBlur", resolver: yupResolver(schema) });
 
@@ -40,10 +42,12 @@ export default function Contact() {
   function DeleteProduct() {
     setOpenDialog(true);
     
+    
   }
 
   function ConfirmDelete() {
     setOpenDialog(false);
+    reset();
     console.log("Product deleted");
     
    
@@ -51,6 +55,11 @@ export default function Contact() {
 
   function CancelDelete() {
     setOpenDialog(false);
+    
+  }
+
+  function CancelMod() {
+    reset(); 
   }
 
   
@@ -127,7 +136,7 @@ export default function Contact() {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="primary" startIcon={<ClearOutlinedIcon />}>
+                    <Button variant="outlined" color="primary" startIcon={<ClearOutlinedIcon />} onClick={CancelMod}>
                       CANCEL MODIFICATION
                     </Button>
                   </Grid>
@@ -136,7 +145,8 @@ export default function Contact() {
                       variant="contained"
                       startIcon={<ClearOutlinedIcon />}
                       color="error"
-                      onClick={DeleteProduct}
+                      onClick={DeleteProduct} 
+                     
                     >
                       DELETE PRODUCT
                     </Button>

@@ -27,11 +27,16 @@ export default function Contact() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isValid },
   } = useForm<ContactForm>({ mode: "onBlur", resolver: yupResolver(schema) });
 
   function onFormSubmit(data: ContactForm) {
     console.log(data);
+  }
+
+  function CancelProdCreation() {
+    reset(); 
   }
 
   return (
@@ -107,10 +112,12 @@ export default function Contact() {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button
+                    <Button 
                       variant="outlined"
                       startIcon={<ClearOutlinedIcon />}
                       color="primary"
+                      onClick={CancelProdCreation} 
+                      
                     >
                       CANCEL PRODUCT CREATION
                     </Button>
