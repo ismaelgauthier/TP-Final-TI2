@@ -3,17 +3,24 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import Link from 'next/link';
 
-const NewButton = () => {
+interface NewButtonProps {
+  href: string;
+}
+
+const NewButton: React.FC<NewButtonProps> = ({ href }) => {
   return (
-    <Button
-      variant="contained"
-      color="primary"
-      startIcon={<AddIcon />}
-      style={{ backgroundColor: '#FFA31A', color: 'black'}}
-    >
-      NEW
-    </Button>
+    <Link href={href} passHref>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+        style={{ backgroundColor: '#FFA31A', color: 'black' }}
+      >
+        NEW
+      </Button>
+    </Link>
   );
 };
 
