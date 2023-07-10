@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import HeaderTitle from '@/components/atoms/header-title/header-title';
 
 const schema = yup
   .object({
@@ -33,7 +32,7 @@ const CategoryPage = () => {
   const onFormSubmit = (data: ContactForm) => {
     console.log(data);
 
-    const categoryId = "id";
+    const categoryId = window.location.pathname.split('/')[2];
     fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`, {
       method: 'PUT',
       headers: {
@@ -73,7 +72,7 @@ const CategoryPage = () => {
     setOpenDialog(false);
     reset();
 
-    const categoryId = "id";
+    const categoryId = window.location.pathname.split('/')[2];
     fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`, {
       method: 'DELETE',
     })
@@ -99,21 +98,6 @@ const CategoryPage = () => {
 
   return (
     <Container>
-      <Box mt={4} mb={4}>
-        <Breadcrumbs>
-          <Typography component="span">Home</Typography>
-          <Typography variant="h4">Category</Typography>
-        </Breadcrumbs>
-      </Box>
-      <Box display="flex" justifyContent="center">
-        <Card>
-          <CardContent>
-            <Typography variant="h2" align="center">
-              {category ? category.name : 'Loading...'}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
 
       <Container>
         <Card
@@ -132,7 +116,6 @@ const CategoryPage = () => {
             boxShadow: '5px 5px 5px 8px rgba(0, 0, 0, 0.2)',
           }}
         >
-          <HeaderTitle title="Category Update" />
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -175,7 +158,7 @@ const CategoryPage = () => {
       <Dialog open={openDialog} onClose={cancelDelete} style={{ boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2)' }}>
         <DialogTitle>Warning</DialogTitle>
         <DialogContent>
-          <p>Are you sure you want to permanently delete this category? This action cannot be restored.</p>
+          <p>Are you sure you want to permanently delete this category? This action cannot be undone.</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={confirmDelete} color="error" variant="contained">
