@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Breadcrumbs, Container, Typography, Card, CardContent, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -51,8 +51,8 @@ const Contact = () => {
       });
   };
 
-  const cancelProdCreation = () => {
-    reset();
+  const handleCancelClick = () => {
+    window.location.href = "/products";
   };
 
   return (
@@ -82,7 +82,7 @@ const Contact = () => {
               boxShadow: '5px 5px 5px 8px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <HeaderTitle title="Product creation" />
+            <HeaderTitle title="Create product" />
             <form onSubmit={handleSubmit(onFormSubmit)}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -131,7 +131,7 @@ const Contact = () => {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button variant="outlined" startIcon={<ClearOutlinedIcon />} color="primary" onClick={cancelProdCreation}>
+                      <Button variant="outlined" startIcon={<ClearOutlinedIcon />} color="primary" onClick={handleCancelClick}>
                         CANCEL PRODUCT CREATION
                       </Button>
                     </Grid>

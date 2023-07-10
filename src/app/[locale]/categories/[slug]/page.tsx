@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import HeaderTitle from '@/components/atoms/header-title/header-title';
 
 const schema = yup
   .object({
@@ -17,6 +18,7 @@ const schema = yup
 interface ContactForm {
   updatecategory: string;
 }
+
 
 const CategoryPage = () => {
   const {
@@ -69,7 +71,7 @@ const CategoryPage = () => {
   }, []);
 
   const confirmDelete = () => {
-    setOpenDialog(false);
+    setOpenDialog(true);
     reset();
 
     const categoryId = window.location.pathname.split('/')[2];
@@ -88,12 +90,12 @@ const CategoryPage = () => {
       });
   };
 
-  const cancelDelete = () => {
-    setOpenDialog(false);
+  const handleCancelClick = () => {
+    window.location.href = "/categories";
   };
 
-  const cancelMod = () => {
-    reset();
+  const cancelDelete = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -116,6 +118,7 @@ const CategoryPage = () => {
             boxShadow: '5px 5px 5px 8px rgba(0, 0, 0, 0.2)',
           }}
         >
+           <HeaderTitle title="Category Update" />
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -139,7 +142,7 @@ const CategoryPage = () => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="primary" onClick={cancelMod}>
+                    <Button variant="outlined" color="primary" onClick={handleCancelClick}>
                       CANCEL MODIFICATION
                     </Button>
                   </Grid>
@@ -161,7 +164,7 @@ const CategoryPage = () => {
           <p>Are you sure you want to permanently delete this category? This action cannot be undone.</p>
         </DialogContent>
         <DialogActions>
-          <Button onClick={confirmDelete} color="error" variant="contained">
+        <Button onClick={() => { confirmDelete(); handleCancelClick(); }} color="error" variant="contained">
             YES
           </Button>
           <Button onClick={cancelDelete} color="primary" variant="outlined">
