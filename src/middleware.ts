@@ -14,3 +14,4 @@ export const config = {
   // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
   matcher: ['/((?!api|_next|.*\\..*).*)']
 };
+
