@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -7,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Sidebar from '../sidebar/sidebar';
+import Link from 'next/link';
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,7 +20,7 @@ function Navbar() {
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#FFA31A', boxShadow: 'none' }}>
-      <Toolbar sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
+      <Toolbar sx={{ paddingLeft: '16px', paddingRight: '16px', display: 'flex', justifyContent: 'space-between' }}>
         <IconButton
           edge="start"
           color="inherit"
@@ -33,6 +36,11 @@ function Navbar() {
               MyVendorHub
             </Box>
           </Typography>
+        </Box>
+        <Box >
+          <Link href="/en" passHref style={{ marginRight: '8px' }}>EN</Link>
+          /
+          <Link href="/fr" passHref  style={{ marginLeft: '8px' }}>FR</Link>
         </Box>
       </Toolbar>
       <Drawer

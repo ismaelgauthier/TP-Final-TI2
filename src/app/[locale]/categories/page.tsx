@@ -5,6 +5,7 @@ import { Card, CardHeader, CardContent, Box, IconButton } from '@mui/material';
 import { Settings } from '@mui/icons-material';
 import Link from 'next/link';
 import NewButton from '@/components/molecules/create_button/create_button';
+import { useTranslations } from "next-intl";
 
 interface Category {
   _id: string;
@@ -52,11 +53,13 @@ const CategoriesList = () => {
     _id: category._id,
   }));
 
+  const t = useTranslations("category");
+
   return (
     <Box mt={4}>
       <Card>
         <CardHeader
-          title="Categories"
+          title={t("cardHeaderTitle")}
           action={
             <Box display="flex" alignItems="center">
               <NewButton href="/createCategory" />
