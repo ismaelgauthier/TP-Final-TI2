@@ -29,6 +29,7 @@ const CategoryPage = () => {
 
   const [category, setCategory] = useState<{ _id: string; name: string } | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [isTextFieldEmpty, setIsTextFieldEmpty] = useState(true);
 
   const categoryId = window.location.pathname.split('/')[3];
 
@@ -49,7 +50,8 @@ const CategoryPage = () => {
 
   const onFormSubmit = (data: ContactForm) => {
     console.log(data);
-
+    setIsTextFieldEmpty(true);
+    
     fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`, {
       method: 'PUT',
       headers: {
@@ -94,6 +96,10 @@ const CategoryPage = () => {
     setOpenDialog(false);
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsTextFieldEmpty(event.target.value === '');
+  };
+
   return (
     <Container>
       <Container>
@@ -125,13 +131,20 @@ const CategoryPage = () => {
                   error={!!errors.name}
                   helperText={errors.name?.message}
                   required
+                  onChange={handleInputChange}
                 />
               </Grid>
 
               <Grid item xs={12}>
                 <Grid container spacing={2} justifyContent="flex-start">
                   <Grid item>
-                    <Button variant="contained" startIcon={<CheckIcon />} color="success" type="submit">
+                    <Button
+                      variant="contained"
+                      startIcon={<CheckIcon />}
+                      color="success"
+                      type="submit"
+                      disabled={isTextFieldEmpty}
+                    >
                       UPDATE CATEGORY
                     </Button>
                   </Grid>
