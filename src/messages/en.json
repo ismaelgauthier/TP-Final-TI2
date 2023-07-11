@@ -1,12 +1,43 @@
 
 {
-    "Index": {
-      "title": "Hello world!"
-    },
-
     "category": { 
       "cardHeaderTitle" : "Categories"
     },
+
+    "product" : {
+      "title" : "Title",
+      "description" : "Descritpion",
+      "price" : "Price",
+      "title2" : "Products"
+    },
+
+    "createProduct" :  {
+      "title" : "Title",
+      "description" : "Description",
+      "price" : "Price",
+      "category" : "Category ID",
+      "create" : "CREATE PRODUCT",
+      "cancel" : "CANCEL PRODUCT CREATION"
+    },
+
+    "createCategory" : {
+      "category" : "New Category",
+      "create" : "CREATE CATEGORY",
+      "cancel" : "CANCEL CATEGORY CREATION"
+    },
+
+    "updateCategory" : {
+      "update" : "Update Category",
+      "update1" : "UPDATE CATEGORY",
+      "cancel" : "CANCEL MODIFICATION",
+      "delete" : "DELETE CATEGORY",
+      "warning" : "WARNING",
+      "yes" : "YES",
+      "no" : "NO",
+      "message" : "Are you sure you want to permanently delete this category? This action cannot be undone."
+    },
+
+   
 
     "sideBar" : {
       "home" : "Home",
@@ -30,6 +61,10 @@
       "paragraphe3" : "Discover our carefully curated selection of unique products directly from our passionate vendors. Whether you're looking for handmade crafts, original artwork, or gourmet treats, MyVendorHub is your ideal destination to find what you love.",
       "paragraphe4" : "Join our community today and dive into the captivating world of MyVendorHub!",
       "title" : "Welcome on MyVendorHub"
+    },
+
+    "buttonNew": {
+      "buttonNew" : "New"
     }
 
   }

@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { useTranslations } from "next-intl";
 
 const schema = yup
   .object({
@@ -105,7 +106,7 @@ const CategoryPage = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsTextFieldEmpty(event.target.value === '');
   };
-
+  const t = useTranslations("updateCategory");
   return (
     <Container>
       <Container>
@@ -130,7 +131,7 @@ const CategoryPage = () => {
               <Grid item xs={12}>
                 <TextField
                   id="name"
-                  label="Update category"
+                  label={t("update")}
                   variant="outlined"
                   fullWidth
                   {...register('name')}
@@ -151,17 +152,17 @@ const CategoryPage = () => {
                       type="submit"
                       disabled={isTextFieldEmpty}
                     >
-                      UPDATE CATEGORY
+                      {t("update1")}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button variant="outlined" color="primary" onClick={() => window.location.href = '/categories'}>
-                      CANCEL MODIFICATION
+                      {t("cancel")}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button variant="contained" startIcon={<ClearOutlinedIcon />} color="error" onClick={deleteCategory}>
-                      DELETE CATEGORY
+                      {t("delete")}
                     </Button>
                   </Grid>
                 </Grid>
@@ -172,16 +173,16 @@ const CategoryPage = () => {
       </Container>
 
       <Dialog open={openDialog} onClose={cancelDelete} style={{ boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2)' }}>
-        <DialogTitle>Warning</DialogTitle>
+        <DialogTitle>{t("warning")}</DialogTitle>
         <DialogContent>
-          <p>Are you sure you want to permanently delete this category? This action cannot be undone.</p>
+          <p>{t("message")}</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={confirmDelete} color="error" variant="contained">
-            YES
+            {t("yes")}
           </Button>
           <Button onClick={cancelDelete} color="primary" variant="outlined">
-            NO
+            {t("no")}
           </Button>
         </DialogActions>
       </Dialog>

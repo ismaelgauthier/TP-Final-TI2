@@ -1,16 +1,11 @@
+"use client"
 import React from "react";
-
-function createCategory() {
-
-}
-
-createCategory: "use client"
-
 import { Button, Card, Container, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useTranslations } from "next-intl";
 //the schema for the form
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -65,6 +60,7 @@ export default function Contact() {
   const handleCancelClick = () => {
     window.location.href = "/categories";
   };
+  const t = useTranslations("createCategory");
 //returning the page
   return (
     <Container>
@@ -89,7 +85,7 @@ export default function Contact() {
             <Grid item xs={12}>
               <TextField
                 id="name"
-                label="New category"
+                label={t("category")}
                 variant="outlined"
                 fullWidth
                 {...register("name")}
@@ -108,7 +104,7 @@ export default function Contact() {
                     color="success"
                     type="submit"
                   >
-                    CREATE CATEGORY
+                    {t("create")}
                   </Button>
                 </Grid>
                 <Grid item>
@@ -117,7 +113,7 @@ export default function Contact() {
                     color="error"
                     onClick={handleCancelClick}
                   >
-                    CANCEL CATEGORY CREATION
+                    {t("cancel")}
                   </Button>
                 </Grid>
               </Grid>

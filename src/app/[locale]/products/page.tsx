@@ -5,6 +5,7 @@ import { DataGrid, GridColDef, GridCellParams, GridRowParams } from '@mui/x-data
 import { Card, CardHeader, CardContent, Box, IconButton, TextField } from '@mui/material';
 import { Settings } from '@mui/icons-material';
 import NewButton from '@/components/molecules/create_button/create_button';
+import { useTranslations } from "next-intl";
 //interface for the product
 interface Product {
   _id: string;
@@ -14,28 +15,36 @@ interface Product {
   imageUrl: string;
   categoryId: string;
 }
-//columns for the data grid
-const columns: GridColDef[] = [
-  {
-    field: 'title',
-    headerName: 'Title',
-    flex: 1,
-  },
-  {
-    field: 'description',
-    headerName: 'Description',
-    flex: 1,
-  },
-  {
-    field: 'price',
-    headerName: 'Price',
-    flex: 1,
-  },
-];
+
+
+
+
 //the main page for the products
 const ProductsPage = () => {
+  const t = useTranslations("product");
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+
+  const columns: GridColDef[] = [
+   
+    {
+      field: 'title',
+      headerName: t("title"),
+      flex: 1,
+    },
+    {
+      field: 'description',
+      headerName: t("description"),
+      flex: 1,
+    },
+    {
+      field: 'price',
+      headerName: t("price"),
+      flex: 1,
+    },
+  ];
+
+
 //fetching the data from the api
   useEffect(() => {
     const fetchProducts = async () => {
@@ -71,11 +80,12 @@ const ProductsPage = () => {
     setSearchQuery(event.target.value);
   };
 //returning the page
+
   return (
     <Box mt={12}>
       <Card>
         <CardHeader
-          title="Products"
+          title={t("title2")}
           action={
             <Box display="flex" alignItems="center">
               <NewButton href="/createProduct" />

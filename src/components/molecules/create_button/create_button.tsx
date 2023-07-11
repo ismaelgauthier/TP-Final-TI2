@@ -4,12 +4,14 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
+import { useTranslations } from "next-intl";
 
 interface NewButtonProps {
   href: string;
 }
 
 const NewButton: React.FC<NewButtonProps> = ({ href }) => {
+  const t = useTranslations("buttonNew");
   return (
     <Link href={href} passHref>
       <Button
@@ -18,7 +20,7 @@ const NewButton: React.FC<NewButtonProps> = ({ href }) => {
         startIcon={<AddIcon />}
         style={{ backgroundColor: '#FFA31A', color: 'black' }}
       >
-        NEW
+        {t("buttonNew")}
       </Button>
     </Link>
   );

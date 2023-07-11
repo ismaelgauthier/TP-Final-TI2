@@ -1,11 +1,40 @@
 
 {
-    "Index": {
-      "title": "Bonjour Hello world!"
-    },
-
     "category": { 
       "cardHeaderTitle" : "Catégories"
+    },
+
+    "product" : {
+      "title" : "Titre",
+      "description" : "Descritpion",
+      "price" : "Prix",
+      "title2" : "Produits"
+    },
+
+    "createProduct" :  {
+      "title" : "Titre",
+      "description" : "Description",
+      "price" : "Prix",
+      "category" : "Catégorie ID",
+      "create" : "CRÉER UN PRODUIT",
+      "cancel" : "ANNULER LA CRÉATION"
+    },
+
+    "createCategory" : {
+      "category" : "Nouvelle Catégorie",
+      "create" : "CRÉER UNE CATÉGORIE",
+      "cancel" : "ANNULER LA CRÉATION"
+    },
+
+    "updateCategory" : {
+      "update" : "Mise à jour de la catégorie",
+      "update1" : "MISE À JOUR CATÉGORIE",
+      "cancel" : "ANNULER LA MODIFICATION",
+      "delete" : "SUPRIMER LA CATÉGORIE",
+      "warning" : "AVERTISSEMENT",
+      "yes" : "OUI",
+      "no" : "NON",
+      "message" : "Êtes-vous sûr de vouloir supprimer définitivement cette catégorie ? Cette action est irréversible."
     },
 
     "sideBar" : {
@@ -30,6 +59,10 @@
       "paragraphe3" : " Découvrez notre sélection soigneusement choisie de produits uniques directement de nos vendeurs passionnés. Que vous cherchiez de l'artisanat fait main, des œuvres d'art originales ou des produits gourmands, MyVendorHub est votre destination idéale pour trouver ce que vous aimez.",
       "paragraphe4" : "Rejoignez notre communauté dès aujourd'hui et plongez dans l'univers captivant de MyVendorHub !",
       "title" : "Bienvenue sur MyVendorHub"
+    },
+
+    "buttonNew": {
+      "buttonNew" : "Nouveau"
     }
   }
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useTranslations } from "next-intl";
 
 const schema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -60,8 +61,10 @@ export default function CreateProduct() {
   };
 
   const handleCancelClick = () => {
+    
     window.location.href = "/products";
   };
+  const t = useTranslations("createProduct");
 
   return (
     <Container>
@@ -82,11 +85,12 @@ export default function CreateProduct() {
         }}
       >
         <form onSubmit={handleSubmit(handleFormSubmit)}>
+          
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 id="title"
-                label="Title"
+                label={t("title")}
                 variant="outlined"
                 fullWidth
                 {...register("title")}
@@ -100,7 +104,7 @@ export default function CreateProduct() {
             <Grid item xs={12}>
               <TextField
                 id="description"
-                label="Description"
+                label={t("description")}
                 variant="outlined"
                 fullWidth
                 multiline
@@ -115,7 +119,7 @@ export default function CreateProduct() {
             <Grid item xs={12}>
               <TextField
                 id="price"
-                label="Price"
+                label={t("price")}
                 variant="outlined"
                 fullWidth
                 type="number"
@@ -144,7 +148,7 @@ export default function CreateProduct() {
             <Grid item xs={12}>
               <TextField
                 id="categoryId"
-                label="Category ID"
+                label={t("category")}
                 variant="outlined"
                 fullWidth
                 {...register("categoryId")}
@@ -164,7 +168,7 @@ export default function CreateProduct() {
                     color="success"
                     type="submit"
                   >
-                    CREATE PRODUCT
+                    {t("create")}
                   </Button>
                 </Grid>
                 <Grid item>
@@ -173,7 +177,7 @@ export default function CreateProduct() {
                     color="error"
                     onClick={handleCancelClick}
                   >
-                    CANCEL PRODUCT CREATION
+                    {t("cancel")}
                   </Button>
                 </Grid>
               </Grid>
