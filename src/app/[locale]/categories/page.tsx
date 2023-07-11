@@ -1,9 +1,9 @@
 "use client"
+
 import React, { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridCellParams, GridRowParams } from '@mui/x-data-grid';
 import { Card, CardHeader, CardContent, Box, IconButton } from '@mui/material';
 import { Settings } from '@mui/icons-material';
-import Link from 'next/link';
 import NewButton from '@/components/molecules/create_button/create_button';
 
 interface Category {
@@ -15,16 +15,14 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Categories',
-    width: 200,
+    flex: 1,
     renderCell: (params: GridCellParams) => (
-      <Link href={`/categories/${params.row._id}`} passHref>
-        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-          {params.value}
-          <IconButton disabled>
-            <Settings />
-          </IconButton>
-        </div>
-      </Link>
+      <div>
+        {params.value}
+        <IconButton disabled>
+          <Settings />
+        </IconButton>
+      </div>
     ),
   },
 ];
@@ -46,14 +44,17 @@ const CategoriesList = () => {
     fetchCategories();
   }, []);
 
-  const rows = categories.map((category, index) => ({
-    id: `category-${index}`,
+  const rows = categories.map((category) => ({
+    id: category._id,
     name: category.name,
-    _id: category._id,
   }));
 
+  const handleRowClick = (params: GridRowParams) => {
+    window.location.href = `/categories/${params.id}`;
+  };
+
   return (
-    <Box mt={4}>
+    <Box mt={12}>
       <Card>
         <CardHeader
           title="Categories"
@@ -68,9 +69,15 @@ const CategoriesList = () => {
             <DataGrid
               rows={rows}
               columns={columns}
+              disableColumnMenu
+              disableColumnSelector
               disableRowSelectionOnClick
-              getRowId={(row) => row.id}
               hideFooterPagination
+              components={{
+                Toolbar: () => null,
+              }}
+              getRowClassName={(_params) => 'category-row'}
+              onRowClick={handleRowClick}
             />
           </div>
         </CardContent>
@@ -80,3 +87,10 @@ const CategoriesList = () => {
 };
 
 export default CategoriesList;
+
+<style jsx>{`
+  .category-row {
+    cursor: pointer;
+  }
+  
+`}</style>
