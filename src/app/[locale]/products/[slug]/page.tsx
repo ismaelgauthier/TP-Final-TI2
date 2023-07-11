@@ -1,233 +1,173 @@
-"use client"
+"use client";
 
-import { Button, Card, Container, Grid, TextField } from "@mui/material";
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import React, { useEffect, useState } from 'react';
+import { Box, Breadcrumbs, Container, Typography, Card, CardContent, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
-const schema = yup.object().shape({
-  title: yup.string().required("Title is required"),
-  description: yup.string().required("Description is required"),
-  price: yup.number().required("Price is required").positive("Price must be a positive number"),
-  imageUrl: yup.string().required("Image URL is required"),
-  categoryId: yup.string().required("Category ID is required"),
-});
+const schema = yup
+  .object({
+    name: yup.string().min(2).max(20).required(),
+  })
+  .required();
 
-export default function EditProduct() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    price: "",
-    imageUrl: "",
-    categoryId: "",
-  });
+interface ContactForm {
+  name: string;
+}
 
+const CategoryPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-    setValue
-  } = useForm({
-    resolver: yupResolver(schema)
-  });
+    setValue,
+  } = useForm<ContactForm>({ mode: 'onBlur', resolver: yupResolver(schema) });
 
-  const productId = window.location.pathname.split('/')[2];
+  const [category, setCategory] = useState<{ _id: string; name: string } | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const categoryId = window.location.pathname.split('/')[3];
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchCategory = async () => {
       try {
-        const response = await fetch(`https://apiraphaeldoucet.onrender.com/products/${productId}`);
+        const response = await fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`);
         const data = await response.json();
-        const { title, description, price, imageUrl, categoryId } = data.product;
-        setFormData({ title, description, price, imageUrl, categoryId });
-        setValue("title", title);
-        setValue("description", description);
-        setValue("price", price);
-        setValue("imageUrl", imageUrl);
-        setValue("categoryId", categoryId);
+        setCategory(data.category);
+        setValue('name', data.category.name);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchProduct();
-  }, [productId, setValue]);
+    fetchCategory();
+  }, [categoryId, setValue]);
 
-  const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
-    const { name, value } = event.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+  const onFormSubmit = (data: ContactForm) => {
+    console.log(data);
 
-  const handleFormSubmit = (data: any) => {
-    fetch(`https://apiraphaeldoucet.onrender.com/products/${productId}`, {
-      method: "PUT",
+    fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`, {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((updatedProduct) => {
-        console.log("Product updated:", updatedProduct);
-        window.location.href = "/products";
+      .then(response => response.json())
+      .then(data => {
+        console.log('Category updated:', data);
       })
-      .catch((error) => {
-        console.error("Error updating product:", error);
+      .catch(error => {
+        console.error('Error updating category:', error);
       });
   };
 
-  const handleCancelClick = () => {
-    window.location.href = "/products";
+  const deleteCategory = () => {
+    setOpenDialog(true);
   };
 
-  const handleDeleteClick = () => {
-    fetch(`https://apiraphaeldoucet.onrender.com/products/${productId}`, {
-      method: "DELETE"
+  const confirmDelete = () => {
+    setOpenDialog(false);
+    reset();
+
+    fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`, {
+      method: 'DELETE',
     })
-      .then((response) => {
+      .then(response => {
         if (response.ok) {
-          console.log("Product deleted");
-          window.location.href = "/products";
+          console.log('Category deleted');
+          window.location.href = '/categories';
         } else {
-          console.error("Error deleting product:", response.status);
+          console.error('Error deleting category:', response.status);
         }
       })
-      .catch((error) => {
-        console.error("Error deleting product:", error);
+      .catch(error => {
+        console.error('Error deleting category:', error);
       });
+  };
+
+  const cancelDelete = () => {
+    setOpenDialog(false);
   };
 
   return (
     <Container>
-      <Card
-        className="Card"
-        style={{
-          width: "75%",
-          maxWidth: "800px",
-          backgroundColor: "white",
-          border: "1px solid white",
-          padding: "10px",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          alignItems: "center",
-          boxShadow: "5px 5px 5px 8px rgba(0, 0, 0, 0.2)"
-        }}
-      >
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                id="title"
-                label="Title"
-                variant="outlined"
-                fullWidth
-                {...register("title")}
-                value={formData.title}
-                onChange={handleInputChange}
-                error={!!errors.title}
-                helperText={errors.title?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="description"
-                label="Description"
-                variant="outlined"
-                fullWidth
-                multiline
-                {...register("description")}
-                value={formData.description}
-                onChange={handleInputChange}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="price"
-                label="Price"
-                variant="outlined"
-                fullWidth
-                type="number"
-                {...register("price")}
-                value={formData.price}
-                onChange={handleInputChange}
-                error={!!errors.price}
-                helperText={errors.price?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="imageUrl"
-                label="Image URL"
-                variant="outlined"
-                fullWidth
-                {...register("imageUrl")}
-                value={formData.imageUrl}
-                onChange={handleInputChange}
-                error={!!errors.imageUrl}
-                helperText={errors.imageUrl?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="categoryId"
-                label="Category ID"
-                variant="outlined"
-                fullWidth
-                {...register("categoryId")}
-                value={formData.categoryId}
-                onChange={handleInputChange}
-                error={!!errors.categoryId}
-                helperText={errors.categoryId?.message}
-                required
-              />
-            </Grid>
+      <Container>
+        <Card
+          className="Card"
+          style={{
+            width: '75%',
+            maxWidth: '800px',
+            backgroundColor: 'white',
+            border: '1px solid white',
+            padding: '10px',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            alignItems: 'center',
+            boxShadow: '5px 5px 5px 8px rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <form onSubmit={handleSubmit(onFormSubmit)}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  id="name"
+                  label="Update category"
+                  variant="outlined"
+                  fullWidth
+                  {...register('name')}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                  required
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2} justifyContent="flex-start">
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    type="submit"
-                  >
-                    UPDATE PRODUCT
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    onClick={handleDeleteClick}
-                  >
-                    DELETE PRODUCT
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleCancelClick}
-                  >
-                    CANCEL MODIFICATION
-                  </Button>
+              <Grid item xs={12}>
+                <Grid container spacing={2} justifyContent="flex-start">
+                  <Grid item>
+                    <Button variant="contained" startIcon={<CheckIcon />} color="success" type="submit">
+                      UPDATE CATEGORY
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="outlined" color="primary" onClick={() => window.location.href = '/categories'}>
+                      CANCEL MODIFICATION
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="contained" startIcon={<ClearOutlinedIcon />} color="error" onClick={deleteCategory}>
+                      DELETE CATEGORY
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </Card>
+          </form>
+        </Card>
+      </Container>
+
+      <Dialog open={openDialog} onClose={cancelDelete} style={{ boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2)' }}>
+        <DialogTitle>Warning</DialogTitle>
+        <DialogContent>
+          <p>Are you sure you want to permanently delete this category? This action cannot be undone.</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={confirmDelete} color="error" variant="contained">
+            YES
+          </Button>
+          <Button onClick={cancelDelete} color="primary" variant="outlined">
+            NO
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
-}
+};
+
+export default CategoryPage;
