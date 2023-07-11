@@ -15,10 +15,12 @@ const schema = yup
   .required();
 
 interface ContactForm {
+
   name: string;
 }
 
 const CategoryPage = () => {
+
   const {
     register,
     handleSubmit,
@@ -33,19 +35,23 @@ const CategoryPage = () => {
 
   const categoryId = window.location.pathname.split('/')[3];
 
+
   useEffect(() => {
     const fetchCategory = async () => {
       try {
+
         const response = await fetch(`https://apiraphaeldoucet.onrender.com/categories/${categoryId}`);
         const data = await response.json();
         setCategory(data.category);
         setValue('name', data.category.name);
+
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchCategory();
+
   }, [categoryId, setValue]);
 
   const onFormSubmit = (data: ContactForm) => {
@@ -179,6 +185,7 @@ const CategoryPage = () => {
           </Button>
         </DialogActions>
       </Dialog>
+
     </Container>
   );
 };

@@ -1,10 +1,12 @@
 "use client"
 
+
 import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridCellParams, GridRowParams } from '@mui/x-data-grid';
 import { Card, CardHeader, CardContent, Box, IconButton } from '@mui/material';
 import { Settings } from '@mui/icons-material';
 import NewButton from '@/components/molecules/create_button/create_button';
+
 
 interface Category {
   _id: string;
@@ -15,6 +17,7 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Categories',
+
     flex: 1,
     renderCell: (params: GridCellParams) => (
       <div>
@@ -23,6 +26,7 @@ const columns: GridColDef[] = [
           <Settings />
         </IconButton>
       </div>
+
     ),
   },
 ];
@@ -44,6 +48,7 @@ const CategoriesList = () => {
     fetchCategories();
   }, []);
 
+
   const rows = categories.map((category) => ({
     id: category._id,
     name: category.name,
@@ -58,6 +63,7 @@ const CategoriesList = () => {
       <Card>
         <CardHeader
           title="Categories"
+
           action={
             <Box display="flex" alignItems="center">
               <NewButton href="/createCategory" />
@@ -69,6 +75,7 @@ const CategoriesList = () => {
             <DataGrid
               rows={rows}
               columns={columns}
+
               disableColumnMenu
               disableColumnSelector
               disableRowSelectionOnClick
@@ -78,6 +85,7 @@ const CategoriesList = () => {
               }}
               getRowClassName={(_params) => 'category-row'}
               onRowClick={handleRowClick}
+
             />
           </div>
         </CardContent>
@@ -88,9 +96,11 @@ const CategoriesList = () => {
 
 export default CategoriesList;
 
+
 <style jsx>{`
   .category-row {
     cursor: pointer;
   }
   
 `}</style>
+

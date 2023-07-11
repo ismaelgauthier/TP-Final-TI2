@@ -2,10 +2,12 @@ import createMiddleware from 'next-intl/middleware';
  
 export default createMiddleware({
   // A list of all locales that are supported
-  locales: ['en', 'fr'],
+
+  locales: ['fr', 'en'],
  
   // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
-  defaultLocale: 'en',
+  defaultLocale: 'fr',
+
   localePrefix: "always",
 });
  
@@ -14,4 +16,3 @@ export const config = {
   // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
   matcher: ['/((?!api|_next|.*\\..*).*)']
 };
-
