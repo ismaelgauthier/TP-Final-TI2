@@ -1,0 +1,68 @@
+
+{
+    "category": { 
+      "cardHeaderTitle" : "Catégories"
+    },
+
+    "product" : {
+      "title" : "Titre",
+      "description" : "Descritpion",
+      "price" : "Prix",
+      "title2" : "Produits"
+    },
+
+    "createProduct" :  {
+      "title" : "Titre",
+      "description" : "Description",
+      "price" : "Prix",
+      "category" : "Catégorie ID",
+      "create" : "CRÉER UN PRODUIT",
+      "cancel" : "ANNULER LA CRÉATION"
+    },
+
+    "createCategory" : {
+      "category" : "Nouvelle Catégorie",
+      "create" : "CRÉER UNE CATÉGORIE",
+      "cancel" : "ANNULER LA CRÉATION"
+    },
+
+    "updateCategory" : {
+      "update" : "Mise à jour de la catégorie",
+      "update1" : "MISE À JOUR CATÉGORIE",
+      "cancel" : "ANNULER LA MODIFICATION",
+      "delete" : "SUPRIMER LA CATÉGORIE",
+      "warning" : "AVERTISSEMENT",
+      "yes" : "OUI",
+      "no" : "NON",
+      "message" : "Êtes-vous sûr de vouloir supprimer définitivement cette catégorie ? Cette action est irréversible."
+    },
+
+    "sideBar" : {
+      "home" : "Accueil",
+      "categories" : "Catégories",
+      "products" : "Produits"
+    },
+
+    "Home": {
+      "auteurs" : {
+        "auteur1" : "Raphael Doucet",
+        "description1" : "Co-fondateur et Directeur de la Communication : Raphael est un expert en communication et marketing. Il s'assure que notre message parvient à tous les passionnés de produits uniques.",
+        "auteur2":"Gabriel Gagné",
+        "description2" : "Co-fondateur et Directeur Technique : Gabriel est le cerveau derrière notre plateforme. Avec son expérience en développement web, il veille à ce que MyVendorHub offre une expérience utilisateur fluide et sécurisée.",
+        "auteur3":"Ismael Gauthier",
+        "description3" : "Responsable des Relations avec les Vendeurs : Ismael est notre lien essentiel avec les vendeurs talentueux. Il travaille en étroite collaboration avec eux pour garantir une sélection de produits variés et de haute qualité.",
+        "auteur4":"Daniel Lelièvre Larue",
+        "description4" : "Responsable du Service Client : Daniel est là pour vous aider ! Avec son approche aimable et professionnelle, il résout rapidement tous vos problèmes et répond à vos questions pour vous offrir une expérience client exceptionnelle."
+      },
+      "paragraphe1" : " Connectez-vous avec une communauté de vendeurs passionnés et découvrez des produits uniques directement de nos clients. Chez MyVendorHub, nous sommes fiers de créer un espace où les acheteurs peuvent se connecter directement avec les vendeurs pour obtenir des produits exceptionnels, fabriqués avec amour et expertise.",
+      "paragraphe2" : "Rencontrez notre équipe dévouée qui travaille sans relâche pour vous apporter les meilleures offres et une expérience de shopping inoubliable :",
+      "paragraphe3" : " Découvrez notre sélection soigneusement choisie de produits uniques directement de nos vendeurs passionnés. Que vous cherchiez de l'artisanat fait main, des œuvres d'art originales ou des produits gourmands, MyVendorHub est votre destination idéale pour trouver ce que vous aimez.",
+      "paragraphe4" : "Rejoignez notre communauté dès aujourd'hui et plongez dans l'univers captivant de MyVendorHub !",
+      "title" : "Bienvenue sur MyVendorHub"
+    },
+
+    "buttonNew": {
+      "buttonNew" : "Nouveau"
+    }
+  }
+
