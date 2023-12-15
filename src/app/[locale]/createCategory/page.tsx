@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslations } from "next-intl";
 //the schema for the form
-const schema = yup.object().shape({
+const schema = yup.object({
   name: yup.string().required("Name is required"),
 });
 
